@@ -1,0 +1,61 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/php:7.1-node-browsers
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      #- image: circleci/mysql:5.7
+
+    working_directory: ~/laravel
+
+    environment:
+      DB_CONNECTION: sqlite
+
+    steps:
+      - checkout
+
+      # SQLite
+      - run: sudo apt-get update
+      - run: sudo apt install -y libsqlite3-dev
+
+      - run: sudo composer self-update
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "composer.json" }}
+            - composer-v1-
+
+      - run:
+          name: Display versions
+          command: |
+            php -v
+            composer --version
+
+      - run: sudo chmod -R 775 storage
+      - run: sudo chmod -R 775 bootstrap/cache
+      - run: cp .env.circleci .env
+      - run: composer update --no-interaction --no-suggest
+      - run: php artisan key:generate
+
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.json" }}
+          paths:
+            - vendor
+
+      - run: touch database/database.sqlite
+      - run: php artisan migrate --env=testing --no-interaction -vvv --database=sqlite
+      - run: php artisan db:seed --env=testing --no-interaction -vvv --database=sqlite
+
+      # run tests!
+      - run: vendor/bin/phpunit -v
+
+      - run: php artisan migrate:rollback --env=testing --no-interaction -vvv --database=sqlite
