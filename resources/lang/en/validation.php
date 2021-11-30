@@ -146,14 +146,14 @@ return [
     | Custom Validation Attributes
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used to swap attribute place-holders
+    | The following language lines are used to swap attribute ville-holders
     | with something more reader friendly such as E-Mail Address instead
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
 
     'attributes' => [
-        'PESEL' => 'PESEL',
+        'num_id' => 'num_id',
 
         'date_start'   => 'start date',
         'date_end'     => 'end date',

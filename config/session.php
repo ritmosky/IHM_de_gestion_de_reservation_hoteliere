@@ -185,8 +185,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | This option determines how your cookies behave when cross-site requests
-    | take place, and can be used to mitigate CSRF attacks. By default, we
-    | do not enable this as other CSRF protection services are in place.
+    | take ville, and can be used to mitigate CSRF attacks. By default, we
+    | do not enable this as other CSRF protection services are in ville.
     |
     | Supported: "lax", "strict"
     |

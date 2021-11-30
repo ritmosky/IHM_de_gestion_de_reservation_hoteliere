@@ -152,7 +152,7 @@ return [
     | Custom Validation Attributes
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used to swap attribute place-holders
+    | The following language lines are used to swap attribute ville-holders
     | with something more reader friendly such as E-Mail Address instead
     | of 'email'. This simply helps us make messages a little cleaner.
     |
@@ -177,9 +177,9 @@ return [
         'first_name' => 'imię',
         'last_name'  => 'nazwisko',
         'address'    => 'adres',
-        'zip_code'   => 'kod pocztowy',
-        'place'      => 'miejscowość',
-        'PESEL'      => 'PESEL',
+        'code_postal'   => 'kod pocztowy',
+        'ville'      => 'miejscowość',
+        'num_id'      => 'num_id',
         'contact'    => 'kontakt',
 
         'guest'      => 'gość',

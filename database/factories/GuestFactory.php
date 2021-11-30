@@ -7,9 +7,9 @@ $factory->define(App\Models\Guest::class, function (Faker $faker) {
         'first_name' => $faker->firstName(),
         'last_name'  => $faker->lastName(),
         'address'    => $faker->streetAddress(),
-        'zip_code'   => $faker->numerify('##-###'),
-        'place'      => $faker->city(),
-        'PESEL'      => $faker->numerify('###########'),
+        'code_postal'   => $faker->numerify('##-###'),
+        'ville'      => $faker->city(),
+        'num_id'      => $faker->numerify('###########'),
         'contact'    => 'test contact',
     ];
 });
@@ -21,9 +21,9 @@ $factory->state(App\Models\Guest::class, 'polish', function () {
         'first_name' => $faker->firstName(),
         'last_name'  => $faker->lastName(),
         'address'    => $faker->streetAddress(),
-        'zip_code'   => $faker->postcode(),
-        'place'      => $faker->city(),
-        'PESEL'      => $faker->pesel(),
+        'code_postal'   => $faker->postcode(),
+        'ville'      => $faker->city(),
+        'num_id'      => $faker->num_id(),
         'contact'    => 'test contact',
     ];
 });
@@ -35,9 +35,9 @@ $factory->state(App\Models\Guest::class, 'german', function () {
         'first_name' => $faker->firstName(),
         'last_name'  => $faker->lastName(),
         'address'    => $faker->streetAddress(),
-        'zip_code'   => $faker->numerify('##-###'),
-        'place'      => $faker->city(),
-        'PESEL'      => $faker->numerify('###########'),
+        'code_postal'   => $faker->numerify('##-###'),
+        'ville'      => $faker->city(),
+        'num_id'      => $faker->numerify('###########'),
         'contact'    => 'test contact',
     ];
 });
@@ -49,9 +49,9 @@ $factory->state(App\Models\Guest::class, 'belarus', function () {
         'first_name' => $faker->firstName(),
         'last_name'  => $faker->lastName(),
         'address'    => $faker->streetAddress(),
-        'zip_code'   => $faker->numerify('##-###'),
-        'place'      => $faker->city(),
-        'PESEL'      => $faker->numerify('###########'),
+        'code_postal'   => $faker->numerify('##-###'),
+        'ville'      => $faker->city(),
+        'num_id'      => $faker->numerify('###########'),
         'contact'    => 'test contact',
     ];
 });
@@ -63,9 +63,9 @@ $factory->state(App\Models\Guest::class, 'french', function () {
         'first_name' => $faker->firstName(),
         'last_name'  => $faker->lastName(),
         'address'    => $faker->streetAddress(),
-        'zip_code'   => $faker->numerify('##-###'),
-        'place'      => $faker->city(),
-        'PESEL'      => $faker->numerify('###########'),
+        'code_postal'   => $faker->numerify('##-###'),
+        'ville'      => $faker->city(),
+        'num_id'      => $faker->numerify('###########'),
         'contact'    => 'test contact',
     ];
 });
@@ -77,9 +77,9 @@ $factory->state(App\Models\Guest::class, 'czech', function () {
         'first_name' => $faker->firstName(),
         'last_name'  => $faker->lastName(),
         'address'    => $faker->streetAddress(),
-        'zip_code'   => $faker->numerify('##-###'),
-        'place'      => $faker->city(),
-        'PESEL'      => $faker->numerify('###########'),
+        'code_postal'   => $faker->numerify('##-###'),
+        'ville'      => $faker->city(),
+        'num_id'      => $faker->numerify('###########'),
         'contact'    => 'test contact',
     ];
 });

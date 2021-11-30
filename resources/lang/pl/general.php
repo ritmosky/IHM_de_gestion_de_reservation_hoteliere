@@ -41,9 +41,9 @@ return [
     'first_name'          => 'Imię',
     'last_name'           => 'Nazwisko',
     'address'             => 'Adres',
-    'zip_code'            => 'Kod pocztowy',
-    'place'               => 'Miejscowość',
-    'PESEL'               => 'PESEL',
+    'code_postal'            => 'Kod pocztowy',
+    'ville'               => 'Miejscowość',
+    'num_id'               => 'num_id',
     'contact'             => 'Kontakt',
     'contact_placeholder' => 'Numer telefonu, e-mail itp.',
 

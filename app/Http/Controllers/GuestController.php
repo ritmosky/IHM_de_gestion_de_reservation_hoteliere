@@ -21,7 +21,7 @@ class GuestController extends Controller implements ManageTableInterface
     {
         $title = trans('general.guests');
 
-        $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')
+        $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'code_postal', 'ville', 'num_id', 'contact')
             ->paginate($this->getItemsPerPage());
 
         if ($dataset->isEmpty()) {
@@ -90,7 +90,7 @@ class GuestController extends Controller implements ManageTableInterface
             $submitRoute = route($this->guestTableService->getRouteName().'.postadd');
         } else {
             try {
-                $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')->findOrFail($objectId);
+                $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'code_postal', 'ville', 'num_id', 'contact')->findOrFail($objectId);
             } catch (ModelNotFoundException $e) {
                 return $this->returnBack([
                     'message'     => trans('general.object_not_found'),
@@ -147,31 +147,31 @@ class GuestController extends Controller implements ManageTableInterface
                 ],
             ],
             [
-                'id'    => 'zip_code',
-                'title' => trans('general.zip_code'),
+                'id'    => 'code_postal',
+                'title' => trans('general.code_postal'),
                 'value' => function (Guest $data) {
-                    return $data->zip_code;
+                    return $data->code_postal;
                 },
                 'optional' => [
                     'required'    => 'required',
-                    'placeholder' => '00-000',
+                    'placeholder' => '00000',
                 ],
             ],
             [
-                'id'    => 'place',
-                'title' => trans('general.place'),
+                'id'    => 'ville',
+                'title' => trans('general.ville'),
                 'value' => function (Guest $data) {
-                    return $data->place;
+                    return $data->ville;
                 },
                 'optional' => [
                     'required' => 'required',
                 ],
             ],
             [
-                'id'    => 'PESEL',
-                'title' => trans('general.PESEL'),
+                'id'    => 'num_id',
+                'title' => trans('general.num_id'),
                 'value' => function (Guest $data) {
-                    return $data->PESEL;
+                    return $data->num_id;
                 },
                 'optional' => [
                     'required'    => 'required',

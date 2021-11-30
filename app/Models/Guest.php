@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string                     $first_name
  * @property string                     $last_name
  * @property string                     $address
- * @property string                     $zip_code
- * @property string                     $place
- * @property string                     $PESEL
+ * @property string                     $code_postal
+ * @property string                     $ville
+ * @property string                     $num_id
  * @property string|null                $contact
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Guest whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guest whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guest whereLastName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guest wherePESEL($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guest wherenum_id($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guest wherePlace($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guest whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guest whereZipCode($value)
@@ -41,7 +41,7 @@ use Illuminate\Database\Eloquent\Model;
 class Guest extends Model
 {
     protected $fillable = [
-        'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact',
+        'first_name', 'last_name', 'address', 'code_postal', 'ville', 'num_id', 'contact',
     ];
 
     /**

@@ -25,7 +25,7 @@ class GuestTest extends BrowserKitTestCase
             ->dontSee('Imię')
             ->dontSee('Nazwisko')
             ->dontSee('Adres')
-            ->dontSee('PESEL')
+            ->dontSee('num_id')
             ->dontSee('Kontakt')
             ->dontSee('Akcje')
             ->dontSee('Edytuj')
@@ -44,7 +44,7 @@ class GuestTest extends BrowserKitTestCase
             ->see('Imię')
             ->see('Nazwisko')
             ->see('Adres')
-            ->see('PESEL')
+            ->see('num_id')
             ->see('Kontakt')
             ->see('Akcje')
             ->see('Edytuj')
@@ -64,7 +64,7 @@ class GuestTest extends BrowserKitTestCase
             ->see('Adres')
             ->see('Kod pocztowy')
             ->see('Miejscowość')
-            ->see('PESEL')
+            ->see('num_id')
             ->see('Kontakt')
             ->see('Wyślij')
             ->press('Wyślij');
@@ -83,18 +83,18 @@ class GuestTest extends BrowserKitTestCase
             ->type($object->first_name, 'first_name')
             ->type($object->last_name, 'last_name')
             ->type($object->address, 'address')
-            ->type($object->zip_code, 'zip_code')
-            ->type($object->place, 'place')
-            ->type($object->PESEL, 'PESEL')
+            ->type($object->code_postal, 'code_postal')
+            ->type($object->ville, 'ville')
+            ->type($object->num_id, 'num_id')
             ->type('test contact', 'contact')
             ->press('Wyślij');
 
         $this->see($object->first_name)
             ->see($object->last_name)
             ->see($object->address)
-            ->see($object->zip_code)
-            ->see($object->place)
-            ->see($object->PESEL)
+            ->see($object->code_postal)
+            ->see($object->ville)
+            ->see($object->num_id)
             ->see('test contact')
             ->dontSee('Brak gości w bazie danych')
             ->see('Zapisano pomyślnie')
@@ -149,7 +149,7 @@ class GuestTest extends BrowserKitTestCase
             ->see('Adres')
             ->see('Kod pocztowy')
             ->see('Miejscowość')
-            ->see('PESEL')
+            ->see('num_id')
             ->see('Kontakt')
             ->see('test contact')
             ->see('Wyślij');
@@ -169,9 +169,9 @@ class GuestTest extends BrowserKitTestCase
             'first_name' => 'aa',
             'last_name'  => 'aa',
             'address'    => 'aa',
-            'zip_code'   => '11-111',
-            'place'      => 'aa',
-            'PESEL'      => 12345678912,
+            'code_postal'   => '11-111',
+            'ville'      => 'aa',
+            'num_id'      => 12345678912,
         ]);
 
         $this->assertEquals(302, $response->status());

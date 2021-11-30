@@ -105,7 +105,7 @@ class ReservationController extends Controller implements ManageTableInterface
     {
         $title = trans('navigation.choose_guest');
 
-        $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')
+        $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'code_postal', 'ville', 'num_id', 'contact')
             ->paginate($this->getItemsPerPage());
 
         if ($dataset->isEmpty()) {
@@ -393,7 +393,7 @@ class ReservationController extends Controller implements ManageTableInterface
 
         $title = trans('navigation.change_guest_for_reservation');
 
-        $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'zip_code', 'place', 'PESEL', 'contact')
+        $dataset = Guest::select('id', 'first_name', 'last_name', 'address', 'code_postal', 'ville', 'num_id', 'contact')
             ->whereNotIn('id', [$reservation->guest_id])
             ->paginate($this->getItemsPerPage());
 

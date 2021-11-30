@@ -29,13 +29,13 @@ class GuestTableService implements TableServiceInterface
             [
                 'title' => trans('general.address'),
                 'value' => function (Guest $data) {
-                    return $data->address.', '.$data->zip_code.' '.$data->place;
+                    return $data->address.', '.$data->code_postal.' '.$data->ville;
                 },
             ],
             [
-                'title' => trans('general.PESEL'),
+                'title' => trans('general.num_id'),
                 'value' => function (Guest $data) {
-                    return $data->PESEL;
+                    return $data->num_id;
                 },
             ],
             [
