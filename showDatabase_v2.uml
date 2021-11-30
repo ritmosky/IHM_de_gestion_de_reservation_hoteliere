@@ -1,0 +1,50 @@
+@startuml
+
+class Users {
+    id {key} : int
+    name : Varchar
+    email {unique} : Varchar
+    password : Varchar
+    is_admin : boolean
+    created_at : Timestamp
+    updtaed_at : Timestamp
+}
+
+class Rooms {
+    id {key} : int
+    number : int
+    floor : int
+    capacity : int
+    price : float
+    created_at : Timestamp
+    updtaed_at : Timestamp
+}
+
+class Guest {
+    id {key} : int
+    first_name : Varchar
+    last_name : Varchar
+    address : Varchar
+    code_postal : Varchar
+    place : Varchar
+    num_ID : Varchar
+    contact : Varchar
+    updtaed_at : Timestamp
+    created_at : Timestamp
+}
+
+class Reservation{
+    id {key} : int
+    date_start : date
+    date_end : date
+    people : int
+    check_in : boolean
+    created_at : date
+    updtaed_at : date
+}
+
+Guest "0..*" -- "0..*" Rooms 
+(Guest,Rooms) .. Reservation
+
+
+@enduml
