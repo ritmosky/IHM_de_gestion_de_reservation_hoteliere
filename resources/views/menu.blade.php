@@ -9,8 +9,54 @@
                 <center><h1> @lang('navigation.hello') {{ Auth::user()->name }} </h1></center>
                 <div class="container">
               	<!-- L'élément "#mon-chart" où placer le chart -->
-              	<div id="graphReservation" style="height: 900px; width: 500px;" ></div>
+              	<div id="graphReservation" style="height: 300px; width: 500px;" ></div>
               </div>
+        </div>
+        <div>
+        @if (!is_null($dataArrive))
+            <center><h2> Arrive </h2></center>
+            <table class="table table-striped table-hover">
+              <thead>
+                  <tr class="table-active">
+                      @foreach ($columns as $column)
+                          <th>{{ $column['title'] }}</th>
+                      @endforeach
+                  </tr>
+              </thead>
+
+              <tbody>
+              @foreach ($dataArrive as $data)
+                  <tr>
+                      @foreach ($columns as $column)
+                          <td>{!! $column['value']($data) !!}</td>
+                      @endforeach
+                  </tr>
+              @endforeach
+              </tbody>
+            </table>
+          @endif
+          @if (!is_null($dataDepart))
+          <center><h2> Depart </h2></center>
+            <table class="table table-striped table-hover">
+              <thead>
+                  <tr class="table-active">
+                      @foreach ($columns as $column)
+                          <th>{{ $column['title'] }}</th>
+                      @endforeach
+                  </tr>
+              </thead>
+
+              <tbody>
+              @foreach ($dataDepart as $data)
+                  <tr>
+                      @foreach ($columns as $column)
+                          <td>{!! $column['value']($data) !!}</td>
+                      @endforeach
+                  </tr>
+              @endforeach
+              </tbody>
+            </table>
+          @endif
         </div>
       </div>
     </div>
@@ -25,7 +71,7 @@
   function drawChart() {
     var data =  google.visualization.arrayToDataTable([
               ['Date', 'Chambres reservées'],
-              @foreach ($dataset as $data) // On parcourt les catégories
+              @foreach ($dataReservationPrevision as $data) // On parcourt les catégories
               [ "{{ $data[0] }}", {{ $data[1] }} ], // Proportion des produits de la catégorie
               @endforeach
             ]);

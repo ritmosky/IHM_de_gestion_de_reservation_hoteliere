@@ -8,10 +8,21 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use App\Services\GuestTableService;
+use App\Services\ReservationTableService;
+use App\Services\MenuTableService;
+use App\Http\Interfaces\ManageTableInterface;
+use App\Services\RoomTableService;
 
 class MenuController extends Controller
 {
-    //
+
+  protected $menuTableService;
+
+  public function __construct(MenuTableService $menuTableService)
+  {
+      $this->menuTableService = $menuTableService;
+  }
 
   public function getReservationOnDate($query,$date_start,$date_end)
   {
@@ -30,13 +41,35 @@ class MenuController extends Controller
   }
 
   public function index(){
-    $dataset = [];
+    $datasetReservationPrevision = [];
 
      for($date = Carbon::now()->subDay(7); $date->lte(Carbon::now()->addDay(7)); $date->addDay()) {
-        $countDate =$this->countReservationOnOneDate(Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people'),$date);
-         $dataset[] = [$date->format('d-m'),$countDate];
+        $countDate =$this->countReservationOnOneDate(Reservation::select('id', 
+              'room_id', 'guest_id', 'date_start', 'date_end', 'people'),$date);
+         $datasetReservationPrevision[] = [$date->format('d-m'),$countDate];
      }
-     return View('menu',compact('dataset'));
+
+     $todayTimeStamp = Carbon::now();
+     $today = $todayTimeStamp->format("Y-m-d");
+
+     $todayIncoming = Reservation::select('id','room_id','guest_id','people')
+                          ->where('date_start',$today)
+                          ->where('Check_in','=',0)
+                          ->paginate(5);
+    
+    $todayDeparture = Reservation::select('id','room_id','guest_id','people')
+            ->where('date_end',$today)
+            ->where('Check_in','=',1)
+            ->paginate(5);
+      
+     $viewData = [
+      'dataReservationPrevision' => $datasetReservationPrevision,
+      'columns' => $this->menuTableService->getColumns(),
+      'dataArrive' => $todayIncoming,
+      'dataDepart' => $todayDeparture,   
+     ];
+
+     return View('menu',$viewData);
 
   }
 }
