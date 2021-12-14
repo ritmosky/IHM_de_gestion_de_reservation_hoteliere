@@ -17,6 +17,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class ReservationController extends Controller implements ManageTableInterface
 {
@@ -31,7 +32,7 @@ class ReservationController extends Controller implements ManageTableInterface
     {
         $title = trans('navigation.all_reservations');
 
-        $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people')
+        $dataset = Reservation::select('id', 'room_id', 'guest_id', 'date_start', 'date_end', 'people','check_in')
             ->with('guest:id,first_name,last_name')
             ->with('room:id,number')
             ->orderBy('date_end', 'DESC')
@@ -46,6 +47,7 @@ class ReservationController extends Controller implements ManageTableInterface
             'dataset'       => $dataset,
             'routeName'     => $this->reservationTableService->getRouteName(),
             'title'         => $title,
+            'checkIn'       => true,
         ];
 
         return view('list', $viewData);
@@ -122,6 +124,29 @@ class ReservationController extends Controller implements ManageTableInterface
 
         return view('list', $viewData);
     }
+
+
+    public function research(Request $request){
+        $label = $request->input('label');  
+        $value = $request->input('value');
+        dd($request);
+        dd($label);
+        dd($value);
+        /*
+        if ($dataset->isEmpty()) {
+            $this->addFlashMessage(trans('general.no_reservations_in_database'), 'alert-danger');
+        }
+
+        $viewData = [
+            'columns'       => $this->reservationTableService->getColumns(),
+            'dataset'       => $dataset,
+            'routeName'     => $this->reservationTableService->getRouteName(),
+            'title'         => $title,
+            'checkIn'       => true,
+        ];
+        return view('list', $viewData);*/
+    }
+
 
     public function searchFreeRooms($guestId)
     {
@@ -278,6 +303,17 @@ class ReservationController extends Controller implements ManageTableInterface
         $this->addFlashMessage(trans('general.saved'), 'alert-success');
 
         return redirect()->route($this->reservationTableService->getRouteName().'.index');
+    }
+
+    public function checkIn($objectId){
+        $object = Reservation::find($objectId);
+        $object->check_in = ( $object->check_in + 1 ) % 2;
+        $object->save();
+        return redirect()->route($this->reservationTableService->getRouteName().'.index')
+            ->with([
+                'message'     => trans("general.saved"),
+                'alert-class' => 'alert-success',
+            ]);     
     }
 
     public function postEdit(ReservationEditRequest $request, $objectId)

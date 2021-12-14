@@ -53,6 +53,12 @@ return [
     'number_of_people' => 'Number of people',
     'change_room'      => 'Change room',
     'change_guest'     => 'Change guest',
+    'check_in'         => 'Check In',
+    'check_out'         => 'Check Out',
+    'check_in_true'    => 'Yes',
+    'check_in_false'   => 'No',
+    'check_in_update'  => 'validate check in',
+    'check_out_update'  => 'validate check out',
 
     'users' => 'Users',
 

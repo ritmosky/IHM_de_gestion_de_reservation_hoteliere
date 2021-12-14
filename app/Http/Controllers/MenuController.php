@@ -66,10 +66,18 @@ class MenuController extends Controller
       'dataReservationPrevision' => $datasetReservationPrevision,
       'columns' => $this->menuTableService->getColumns(),
       'dataArrive' => $todayIncoming,
-      'dataDepart' => $todayDeparture,   
+      'dataDepart' => $todayDeparture, 
+      'routeName'  => $this->menuTableService->getRouteName(),  
      ];
 
      return View('menu',$viewData);
 
+  }
+
+  public function checkIn($objectId){
+    $object = Reservation::find($objectId);
+    $object->check_in = ( $object->check_in + 1 ) % 2;
+    $object->save();
+    return redirect()->route($this->menuTableService->getRouteName().'.index');     
   }
 }

@@ -15,6 +15,8 @@
                             <h2>{{ $title }}</h2>
                         @endif
 
+                        <!-- include('search',['columns'=>$columns,'routeName'=>$routeName])--> 
+
                         @if ($dataset->total() > 0)
                             <table class="table table-striped table-hover">
                                 <thead>
@@ -37,16 +39,22 @@
                                         {{-- Akcje --}}
                                         <td>
                                             @if (!isset($routeChooseName))
+                                                @if (isset($checkIn) && $checkIn)
+                                                    {!! Form::open(['url' => route($routeName.'.checkIn', $data->id), 'class' => 'form-horizontal']) !!}
+                                                    <div class="text-center">
+                                                        <button type="submit" class="btn btn-primary">@lang('general.check_in')</button>
+                                                    </div>
+                                                    {!! Form::close() !!}
+                                                @endif
                                                 @if (!isset($disableEdit) || !$disableEdit)
                                                     {{ Html::link(route($routeName.'.editform', $data->id), trans('general.edit'), ['class' => 'btn btn-sm btn-primary']) }}
                                                 @endif
-
                                                 {{ Form::button(trans('general.delete'), ['class' => 'btn btn-sm btn-danger', 'data-toggle' => 'modal', 'data-target' => '#delete-modal', 'data-id' => $data->id, 'data-message' => isset($deleteMessage) ? $deleteMessage : '' ]) }}
                                             @else
                                                 @php($routeParams = [$data->id])
                                                 @php(!isset($additionalRouteParams) ?: $routeParams = array_merge((array) $additionalRouteParams, $routeParams))
                                                 {{ Html::link(route($routeChooseName, $routeParams), trans('general.select'), ['class' => 'btn btn-sm btn-primary']) }}
-                                            @endif
+                                            @endif  
                                         </td>
                                     </tr>
                                 @endforeach

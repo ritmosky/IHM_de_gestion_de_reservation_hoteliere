@@ -8,7 +8,7 @@ class MenuTableService implements TableServiceInterface
 {
     public function getRouteName()
     {
-        return 'reservation';
+        return 'menu';
     }
 
     public function getColumns()

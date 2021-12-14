@@ -44,6 +44,15 @@ class ReservationTableService implements TableServiceInterface
                     return $data->people;
                 },
             ],
+            [
+                'title' => trans('general.check_in'),
+                'value' => function (Reservation $data) {
+                    if($data->check_in == 1 ){
+                        return trans("general.check_in_true");
+                    }
+                    return trans("general.check_in_false");
+                },
+            ],
         ];
 
         return $dataset;

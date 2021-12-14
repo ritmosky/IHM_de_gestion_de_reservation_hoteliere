@@ -28,6 +28,8 @@ Route::get('/', function () {
     return redirect()->route('room.index');
 })->name('home');
 Route::get('menu', 'MenuController@index')->name('menu.index');
+Route::post('menu/{id}', 'MenuController@checkIn')->name('menu.checkIn')->where(['id' => '[0-9]+']);
+
 
 Route::get('lang/{language}', 'Controller@changeLanguage')->name('lang.set');
 
@@ -54,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('room/edit/{id}', 'RoomController@showAddEditForm')->name('room.editform')->where(['id' => '[0-9]+']);
     Route::post('room/edit/{id}', 'RoomController@store')->name('room.postedit')->where(['id' => '[0-9]+']);
     Route::delete('room/delete/{id}', 'RoomController@delete')->name('room.delete')->where(['id' => '[0-9]+']);
+    
 
     Route::get('guest', 'GuestController@index')->name('guest.index');
     Route::get('guest/add', 'GuestController@showAddEditForm')->name('guest.addform');
@@ -69,7 +72,9 @@ Route::group(['middleware' => 'auth'], function () {
         return redirect()->route('reservation.choose_guest');
     })->name('reservation.addform');
     Route::get('reservation/edit/{id}', 'ReservationController@showEditForm')->name('reservation.editform')->where(['id' => '[0-9]+']);
+    Route::post('reservation/research', 'ReservationController@research')->name('reservation.research');
     Route::post('reservation/edit/{id}', 'ReservationController@postEdit')->name('reservation.postedit')->where(['id' => '[0-9]+']);
+    Route::post('reservation/checkIn/{id}', 'ReservationController@checkIn')->name('reservation.checkIn')->where(['id' => '[0-9]+']);
     Route::delete('reservation/delete/{id}', 'ReservationController@delete')->name('reservation.delete')->where(['id' => '[0-9]+']);
 
     Route::get('reservation/choose_guest', 'ReservationController@chooseGuest')->name('reservation.choose_guest');
@@ -77,6 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('reservation/search_free_rooms/{guestId}', 'ReservationController@postSearchFreeRooms')->name('reservation.post_search_free_rooms')->where(['guestId' => '[0-9]+']);
     Route::get('reservation/choose_room/{guestId}', 'ReservationController@chooseFreeRoom')->name('reservation.choose_free_room')->where(['guestId' => '[0-9]+']);
     Route::get('reservation/add/{guestId}/{roomId}', 'ReservationController@add')->name('reservation.add')->where(['guestId' => '[0-9]+', 'roomId' => '[0-9]+']);
+    
 
     Route::get('reservation/edit_choose_guest/{reservationId}', 'ReservationController@editChooseGuest')->name('reservation.edit_choose_guest')->where(['reservationId' => '[0-9]+']);
     Route::get('reservation/edit_change_guest/{reservationId}/{guestId}', 'ReservationController@editChangeGuest')->name('reservation.edit_change_guest')->where(['reservationId' => '[0-9]+', 'guestId' => '[0-9]+']);

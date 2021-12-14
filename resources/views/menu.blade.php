@@ -21,6 +21,7 @@
                       @foreach ($columns as $column)
                           <th>{{ $column['title'] }}</th>
                       @endforeach
+                        <th> {{trans("general.check_in_update")}}</th>
                   </tr>
               </thead>
 
@@ -31,6 +32,11 @@
                           <td>{!! $column['value']($data) !!}</td>
                       @endforeach
                   </tr>
+                  {!! Form::open(['url' => route($routeName.'.checkIn', $data->id), 'class' => 'form-horizontal']) !!}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">@lang('general.check_in')</button>
+                    </div>
+                  {!! Form::close() !!}
               @endforeach
               </tbody>
             </table>
@@ -43,6 +49,7 @@
                       @foreach ($columns as $column)
                           <th>{{ $column['title'] }}</th>
                       @endforeach
+                          <th> {{trans("general.check_out_update")}}</th>
                   </tr>
               </thead>
 
@@ -52,6 +59,13 @@
                       @foreach ($columns as $column)
                           <td>{!! $column['value']($data) !!}</td>
                       @endforeach
+                      <td>
+                      {!! Form::open(['url' => route($routeName.'.checkIn', $data->id), 'class' => 'form-horizontal']) !!}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">@lang('general.check_out')</button>
+                        </div>
+                      {!! Form::close() !!}
+                      </td>
                   </tr>
               @endforeach
               </tbody>
